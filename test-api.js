@@ -105,7 +105,7 @@ async function runTests() {
 
     // 4. Create a new task (this will trigger the job queue)
     console.log(`4.  Creating a new task for user ${firstUserId}...`);
-    const newtaskResult = await runQuery(`
+    const newTaskResult = await runQuery(`
       mutation {
         createTask(userId: "${firstUserId}", title: "Test job Queue") {
           id
@@ -118,14 +118,14 @@ async function runTests() {
         }
       }
     `);
-    console.log('New task:', JSON.stringify(newtaskResult.data.createtask, null, 2));
+    console.log('New task:', JSON.stringify(newTaskResult.data.createTask, null, 2));
     console.log('✅ Success: Created new task (check worker console for email notification)\n');
 
-    const newtaskId = newtaskResult.data.createtask.id;
+    const newtaskId = newTaskResult.data.createTask.id;
 
     // 5. Update task status (this will trigger another job queue notification)
     console.log(`5. Updating task ${newtaskId} status to IN_PROGRESS...`);
-    const updatetaskResult = await runQuery(`
+    const updateTaskResult = await runQuery(`
       mutation {
         updateTaskStatus(id: "${newtaskId}", status: IN_PROGRESS) {
           id
@@ -134,7 +134,7 @@ async function runTests() {
         }
       }
     `);
-    console.log('Updated task:', JSON.stringify(updatetaskResult.data.updatetaskStatus, null, 2));
+    console.log('Updated task:', JSON.stringify(updateTaskResult.data.updateTaskStatus, null, 2));
     console.log('✅ Success: Updated task status (check worker console for email notification)\n');
 
     // 6. Create a new user(may break the second time...unique email)
