@@ -107,7 +107,7 @@ async function runTests() {
     console.log(`4.  Creating a new task for user ${firstUserId}...`);
     const newtaskResult = await runQuery(`
       mutation {
-        createtask(userId: "${firstUserId}", title: "Test job Queue") {
+        createTask(userId: "${firstUserId}", title: "Test job Queue") {
           id
           title
           status
@@ -127,7 +127,7 @@ async function runTests() {
     console.log(`5. Updating task ${newtaskId} status to IN_PROGRESS...`);
     const updatetaskResult = await runQuery(`
       mutation {
-        updatetaskStatus(id: "${newtaskId}", status: IN_PROGRESS) {
+        updateTaskStatus(id: "${newtaskId}", status: IN_PROGRESS) {
           id
           title
           status
